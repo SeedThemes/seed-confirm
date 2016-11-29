@@ -168,59 +168,7 @@ function seed_confirm_banks( $orderid ) {
 
 	$bacs_settings = reset( $bacs );
 
-	foreach( $bacs_settings->account_details as $_account ) {
-		$is_thaibank = false;
-
-//		$logo = '';
-
-//		if( ( false !==  mb_strpos( trim( $_account['bank_name'] ) , 'กสิกร' ) )
-//			|| stripos( trim( $_account['bank_name'] ) , 'kbank' )
-//			|| stripos( trim( $_account['bank_name'] ) , 'kasikorn' ) ) {
-//			$is_thaibank = true;
-//		$logo = 'kbank';
-//	} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'กรุงเทพ' ) )
-//		|| stripos( trim( $_account['bank_name'] ) , 'bbl' )
-//		|| stripos( trim( $_account['bank_name'] ) , 'bualuang' ) ) {
-//		$is_thaibank = true;			
-//		$logo = 'bbl';
-//	} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'กรุงไทย' ) )
-//		|| stripos( trim( $_account['bank_name'] ) , 'ktb' )
-//		|| stripos( trim( $_account['bank_name'] ) , 'krungthai' ) ) {
-//		$is_thaibank = true;
-//		$logo = 'ktb';
-//	} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ทหารไทย' ) )
-//		|| stripos( trim( $_account['bank_name'] ) , 'tmb' )
-//		|| stripos( trim( $_account['bank_name'] ) , 'thai military' ) ) {
-//		$is_thaibank = true;
-//		$logo = 'tmb';
-//	} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ไทยพาณิชย์' ) )
-//		|| stripos( trim( $_account['bank_name'] ) , 'scb' )
-//		|| stripos( trim( $_account['bank_name'] ) , 'siam commercial' ) ) {
-//		$is_thaibank = true;
-//		$logo = 'scb';
-//	} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'กรุงศรี' ) )
-//		|| stripos( trim( $_account['bank_name'] ) , 'krungsri' ) ) {
-//		$is_thaibank = true;
-//		$logo = 'krungsri';
-//	} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ออมสิน' ) )
-//		|| stripos( trim( $_account['bank_name'] ) , 'gsb' ) ) {
-//		$is_thaibank = true;
-//		$logo = 'gsb';
-//	} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ธนชาต' ) )
-//		|| stripos( trim( $_account['bank_name'] ) , 'tbank' ) ) {
-//		$is_thaibank = true;
-//		$logo = 'tbank';
-//	} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ยูโอบี' ) )
-//		|| stripos( trim( $_account['bank_name'] ) , 'uob' ) ) {
-//		$is_thaibank = true;
-//		$logo = 'uob';
-//	} 
-
-//	if( $logo !== '' )
-//		$_account['logo'] = plugins_url( 'img/'.$logo.'.png', __FILE__ );
-
-	$thai_accounts[] = $_account;
-}
+	$thai_accounts = $bacs_settings->account_details;
 ?>
 <div id="seed-confirm-banks" class="seed-confirm-banks">
 	<h2><?php esc_html_e( 'Our Bank Details', 'seed-confirm' ); ?></h2>
@@ -229,7 +177,6 @@ function seed_confirm_banks( $orderid ) {
 		<table class="table">
 			<thead>
 				<tr>
-					<!-- th class="seed-confirm-bank-logo">&nbsp;</th -->
 					<th class="seed-confirm-bank-name"><?php esc_html_e( 'Bank Name', 'seed-confirm' ); ?></th>
 					<th class="seed-confirm-bank-sort-code"><?php esc_html_e( 'Sort Code', 'seed-confirm' ); ?></th>
 					<th class="seed-confirm-bank-account-number"><?php esc_html_e( 'Account Number', 'seed-confirm' ); ?></th>
@@ -239,7 +186,6 @@ function seed_confirm_banks( $orderid ) {
 			<tbody>
 				<?php foreach( $thai_accounts as $_account ): ?>
 				<tr>
-					<!-- td class="seed-confirm-bank-logo"><img src="<?php echo $_account['logo']; ?>" width="32" height="32"></td -->
 					<td class="seed-confirm-bank-name"><?php echo $_account['bank_name']; ?></td>
 					<td class="seed-confirm-bank-sort-code"><?php echo $_account['sort_code']; ?></td>
 					<td class="seed-confirm-bank-account-number"><?php echo $_account['account_number'];?></td>
@@ -265,67 +211,6 @@ function seed_confirm_scripts() {
 		wp_enqueue_style( 'seed-confirm', plugin_dir_url( __FILE__ ) . 'seed-confirm.css' , array() );
 		wp_enqueue_script( 'seed-confirm', plugin_dir_url( __FILE__ ) . 'seed-confirm.js' , array('jquery'), '2016-1', true );
 	}
-}
-
-add_filter( 'woocommerce_bacs_accounts', 'seed_confirm_bacs', 10 );
-
-function seed_confirm_bacs( $accounts ) {
-	$thai_accounts = array();
-
-	foreach( $accounts as $_account ) {
-		$is_thaibank = false;
-		$logo = '';
-
-		if( mb_strpos( trim( $_account['bank_name'] ) , 'กสิกร' )
-			|| stripos( trim( $_account['bank_name'] ) , 'kbank' )
-			|| stripos( trim( $_account['bank_name'] ) , 'kasikorn' ) ) {
-			$is_thaibank = true;
-		$logo = 'kbank';
-	} else if( mb_strpos( trim( $_account['bank_name'] ) , 'กรุงเทพ' )
-		|| stripos( trim( $_account['bank_name'] ) , 'bbl' )
-		|| stripos( trim( $_account['bank_name'] ) , 'bualuang' ) ) {
-		$is_thaibank = true;			
-		$logo = 'bbl';
-	} else if( mb_strpos( trim( $_account['bank_name'] ) , 'กรุงไทย' )
-		|| stripos( trim( $_account['bank_name'] ) , 'ktb' )
-		|| stripos( trim( $_account['bank_name'] ) , 'krungthai' ) ) {
-		$is_thaibank = true;
-		$logo = 'ktb';
-	} else if( mb_strpos( trim( $_account['bank_name'] ) , 'ทหารไทย' )
-		|| stripos( trim( $_account['bank_name'] ) , 'tmb' )
-		|| stripos( trim( $_account['bank_name'] ) , 'thai military' ) ) {
-		$is_thaibank = true;
-		$logo = 'tmb';
-	} else if( mb_strpos( trim( $_account['bank_name'] ) , 'ไทยพาณิชย์' )
-		|| stripos( trim( $_account['bank_name'] ) , 'scb' )
-		|| stripos( trim( $_account['bank_name'] ) , 'siam commercial' ) ) {
-		$is_thaibank = true;
-		$logo = 'scb';
-	} else if( mb_strpos( trim( $_account['bank_name'] ) , 'กรุงศรี' )
-		|| stripos( trim( $_account['bank_name'] ) , 'krungsri' ) ) {
-		$is_thaibank = true;
-		$logo = 'krungsri';
-	}	else if( mb_strpos( trim( $_account['bank_name'] ) , 'ออมสิน' )
-		|| stripos( trim( $_account['bank_name'] ) , 'gsb' ) ) {
-		$is_thaibank = true;
-		$logo = 'gsb';
-	}	else if( mb_strpos( trim( $_account['bank_name'] ) , 'ธนชาต' )
-		|| stripos( trim( $_account['bank_name'] ) , 'tbank' ) ) {
-		$is_thaibank = true;
-		$logo = 'tbank';
-	}	else if( mb_strpos( trim( $_account['bank_name'] ) , 'ยูโอบี' )
-		|| stripos( trim( $_account['bank_name'] ) , 'uob' ) ) {
-		$is_thaibank = true;
-		$logo = 'uob';
-	}
-
-	if( $logo !== '' )
-		$_account['logo'] = plugins_url( 'img/'.$logo.'.png', __FILE__ );
-
-	$thai_accounts[] = $_account;		
-}
-
-return $thai_accounts;
 }
 
 /**
@@ -428,61 +313,10 @@ function seed_confirm_shortcode( $atts ) {
 				</div>
 				<?php
 				$account_details = get_option('woocommerce_bacs_accounts', true);
-				if( !is_null( $account_details ) ) {
-					foreach( $account_details as $_account ) {
-						$is_thaibank = false;
-						$logo = '';
 
-						if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'กสิกร' ) )
-							|| stripos( trim( $_account['bank_name'] ) , 'kbank' )
-							|| stripos( trim( $_account['bank_name'] ) , 'kasikorn' ) ) {
-							$is_thaibank = true;
-						$logo = 'kbank';
-					} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'กรุงเทพ' ) )
-						|| stripos( trim( $_account['bank_name'] ) , 'bbl' )
-						|| stripos( trim( $_account['bank_name'] ) , 'bualuang' ) ) {
-						$is_thaibank = true;			
-						$logo = 'bbl';
-					} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'กรุงไทย' ) )
-						|| stripos( trim( $_account['bank_name'] ) , 'ktb' )
-						|| stripos( trim( $_account['bank_name'] ) , 'krungthai' ) ) {
-						$is_thaibank = true;
-						$logo = 'ktb';
-					} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ทหารไทย' ) )
-						|| stripos( trim( $_account['bank_name'] ) , 'tmb' )
-						|| stripos( trim( $_account['bank_name'] ) , 'thai military' ) ) {
-						$is_thaibank = true;
-						$logo = 'tmb';
-					} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ไทยพาณิชย์' ) )
-						|| stripos( trim( $_account['bank_name'] ) , 'scb' )
-						|| stripos( trim( $_account['bank_name'] ) , 'siam commercial' ) ) {
-						$is_thaibank = true;
-						$logo = 'scb';
-					} else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'กรุงศรี' ) )
-						|| stripos( trim( $_account['bank_name'] ) , 'krungsri' ) ) {
-						$is_thaibank = true;
-						$logo = 'krungsri';
-					}	else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ออมสิน' ) )
-						|| stripos( trim( $_account['bank_name'] ) , 'gsb' ) ) {
-						$is_thaibank = true;
-						$logo = 'gsb';
-					}	else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ธนชาต' ) )
-						|| stripos( trim( $_account['bank_name'] ) , 'tbank' ) ) {
-						$is_thaibank = true;
-						$logo = 'tbank';
-					}	else if( ( false !== mb_strpos( trim( $_account['bank_name'] ) , 'ยูโอบี' ) )
-						|| stripos( trim( $_account['bank_name'] ) , 'uob' ) ) {
-						$is_thaibank = true;
-						$logo = 'uob';
-					}
-
-					if( $logo !== '' )
-						$_account['logo'] = plugins_url( 'img/'.$logo.'.png', __FILE__ );
-
-					$thai_accounts[] = $_account;
-				}
-				}
+				$thai_accounts = $account_details;
 			?>
+
 			<div class="form-group seed-confirm-bank-info">
 				<label><?php esc_html_e( 'Bank Account', 'seed-confirm' ); ?></label>
 				<?php if( count( $thai_accounts ) > 0 ): ?>
@@ -491,7 +325,6 @@ function seed_confirm_shortcode( $atts ) {
 				<div class="form-check">
 					<label class="form-check-label">
 						<input class="form-check-input <?php if( isset( $seed_confirm_required['seed_confirm_account_number'] )){ echo 'required';} ?>" type="radio" id="bank-<?php echo $_account['account_number']; ?>" name="seed-confirm-account-number" value="<?php echo $_account['account_number']; ?>"<?php if( $seed_confirm_account_number == $_account['account_number'] ): ?> selected="selected"<?php endif; ?>>
-						<span class="seed-confirm-bank-info-logo"><img src="<?php echo $_account['logo']; ?>" /></span>
 						<span class="seed-confirm-bank-info-bank"><?php echo $_account['bank_name']; ?></span>
 						<span class="seed-confirm-bank-info-account-number"><?php echo $_account['account_number']; ?></span>
 						<span class="seed-confirm-bank-info-account-name"><?php echo $_account['account_name']; ?></span>
@@ -808,55 +641,4 @@ function seed_confirm_register_transfer_notifications_logs() {
 		'publicly_queryable'	=> false
 		)
 	);
-}
-
-/**
- * Copy this function from woocommerce.
- * @copy wp-content/plugins/woocommerce/includes/wc-formatting-functions.php
- */
-function seed_confirm_clean( $var ) {
-	if ( is_array( $var ) ) {
-		return array_map( 'wc_clean', $var );
-	} else {
-		return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
-	}
-}
-
-/**
- * Add confirm payment button into my oder page.
- * For woocommerce only
- */
-add_filter('woocommerce_my_account_my_orders_actions', 'seed_add_confirm_button', 10, 2);
-
-function seed_add_confirm_button($actions, $post){
-
-	$page = get_page_by_path( 'confirm-payment' );
-	if(!$page){
-		return $actions;
-	}
-
-	$url = get_page_link($page->ID);
-
-	// Want to check this order has confirm-payment
-	$params = array(
-		'post_type' => 'seed_confirm_log',
-		'meta_key' => 'seed-confirm-order',
-		'meta_value' => $post->id
-	);
-
-	$seed_confirm_log = get_posts( $params );
-
-	if(count($seed_confirm_log)>0){
-		$actions['-noted'] = array(
-			'url'   => $url,
-			'name'  => __('Confirm Payment', 'seed-confirm'),
-		);
-	}else{
-		$actions['confirm-payment'] = array(
-			'url'   => $url,
-			'name'  => __('Confirm Payment', 'seed-confirm'),
-		);
-	}
-
-	return $actions;
 }
