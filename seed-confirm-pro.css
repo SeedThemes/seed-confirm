@@ -1,0 +1,65 @@
+.seed-confirm-message {max-width: 640px;margin: 0 auto 1.5em;text-align: center;border-radius: 5px;background-color: #57ad68;color: #fff;padding: 10px 30px;font-weight: bold}
+.seed-confirm-form {max-width: 640px;margin: 0 auto 30px;font-size: 1.1em; }
+.seed-confirm-form .btn-primary {margin-top: 10px;font-size: 1.1em;}
+.seed-confirm-form .form-control {margin-bottom: 15px;}
+.seed-confirm-form .required.-invalid {border: 1px solid #c00;}
+.seed-confirm-form .form-control.hasDatepicker {background: url(img/calendar.png) right center no-repeat;background-size: 30px auto;}
+.seed-confirm-form .form-check {margin-bottom: 8px}
+.seed-confirm-form label {display: block;}
+.seed-confirm-banks .table-responsive{border: 1px solid #000;margin-bottom: 1.5em;}
+.seed-confirm-banks table {font-size: 1.1em; width: 100%;margin-bottom: 0}
+.seed-confirm-banks .table>tbody>tr>td {line-height: 32px;}
+.seed-confirm-banks .table>thead>tr>th {border-bottom: 1px solid #000;background-color: #f2f2f2;}
+.seed-confirm-banks .seed-confirm-bank-logo {min-width: 36px;text-align: center;}
+.seed-confirm-banks .seed-confirm-bank-logo img {border-radius: 5px}
+.wc-bacs-bank-details-heading,
+.wc-bacs-bank-details,
+body.woocommerce-order-received .seed_confirm_order_meta {display: none;}
+.seed-confirm-bank-info .form-check-label {cursor: pointer;white-space: nowrap;}
+.seed-confirm-bank-info .form-check-input {margin-right: 5px}
+.seed-confirm-bank-info-logo img {width: 32px;margin-right: 8px;border-radius: 5px}
+.seed-confirm-bank-info-bank {display: inline-block;min-width: 92px}
+.seed-confirm-bank-info-account-number {display: inline-block; min-width: 132px}
+.seed-confirm-bank-info-account-name {display: none}
+#seed-confirm-hour,
+#seed-confirm-minute {display: inline-block; width: auto;vertical-align: middle;}
+.seed-confirm-slip input {border-radius: 4px;}
+
+
+/* datepicker */
+.ui-datepicker {background-color: #fff;border: 1px solid #ccc;border-radius: 4px;display: none;margin-top: 4px;padding: 10px;width: 240px;}
+.ui-datepicker a,
+.ui-datepicker a:hover {text-decoration: none;}
+.ui-datepicker a:hover,
+.ui-datepicker td:hover a {color: #111;transition: color 0.1s ease-in-out;}
+.ui-datepicker .ui-datepicker-header {margin-bottom: 4px;text-align: center;}
+.ui-datepicker .ui-datepicker-title {font-weight: 700;}
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {cursor: pointer;font-style: normal;font-weight: normal;height: 20px;line-height: 1;margin-top: 1px;width: 30px;font-size: 22px; font-family: "Helvetica Neue", Helvetica, sans-serif;}
+.ui-datepicker .ui-datepicker-prev {float: left;text-align: left;}
+.ui-datepicker .ui-datepicker-next {float: right;text-align: right;}
+.ui-datepicker .ui-datepicker-prev:before {content: "\2190";}
+.ui-datepicker .ui-datepicker-next:before {content: "\2192";}
+.ui-datepicker .ui-state-disabled {color: #999}
+.ui-datepicker .ui-icon {display: none;}
+.ui-datepicker .ui-datepicker-calendar {table-layout: fixed;width: 100%;}
+.ui-datepicker .ui-datepicker-calendar th,
+.ui-datepicker .ui-datepicker-calendar td {text-align: center;padding: 4px 0;}
+.ui-datepicker .ui-datepicker-calendar td {border-radius: 3px;transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;}
+.ui-datepicker .ui-datepicker-calendar td:hover {background-color: #eee;	cursor: pointer;}
+.ui-datepicker .ui-datepicker-calendar td a {text-decoration: none;}
+.ui-datepicker .ui-datepicker-current-day {background-color: #4289cc;}
+.ui-datepicker .ui-datepicker-current-day a {color: #fff}
+.ui-datepicker .ui-datepicker-calendar .ui-datepicker-unselectable:hover {background-color: #fff;cursor: default;}
+.ui-datepicker .ui-datepicker-unselectable {color: #999}
+
+
+@media (min-width:480px) {
+	.seed-confirm-bank-info-account-name {display: inline-block;}
+}
+@media (min-width:768px) {
+	.seed-confirm-form {border: 2px solid #ddd;border-radius: 5px;padding: 25px 30px;}
+	.seed-confirm-form .row {margin-left: -15px; margin-right: -15px;}
+	.seed-confirm-form .row:after {display: table; clear: both; content: " ";}
+	.seed-confirm-form .col-sm-6 {padding-left: 15px;padding-right: 15px;width: 50%;float: left;}
+}
