@@ -170,6 +170,9 @@ function seed_confirm_banks( $orderid ) {
 
 	$thai_accounts = $bacs_settings->account_details;
 ?>
+
+<?php do_action('seed_confirm_before_banks', $orderid); ?>
+
 <div id="seed-confirm-banks" class="seed-confirm-banks">
 	<h2><?php esc_html_e( 'Our Bank Details', 'seed-confirm' ); ?></h2>
 	<p><?php esc_html_e( 'Make your payment directly into our bank account.', 'seed-confirm' ); ?></p>
@@ -196,7 +199,49 @@ function seed_confirm_banks( $orderid ) {
 		</table>
 	</div>
 </div>
-<?php 
+<?php do_action('seed_confirm_after_banks', $orderid); ?>
+<?php
+}
+
+/**
+ * Get page url used to show Seed Confirm Form
+ * return false if seed_confirm_page in wp_option table doesn't exist
+ */
+function seed_confirm_get_permalink() {
+	$seed_confirm_page_id = get_option( 'seed_confirm_page', false );
+	if($seed_confirm_page_id) {
+		return get_permalink($seed_confirm_page_id);
+	}
+	return false;
+}
+
+/**
+ * Check if current page is Seed Confirm page
+ * This funciton should be executed in the loop or in Woocommerce template file
+ */
+function is_seed_confirm() {
+	global $post;
+	$seed_confirm_page_id = get_option( 'seed_confirm_page', false );
+	$current_page_id = $post->ID;
+	if($current_page_id == $seed_confirm_page_id) {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Show a Seed Confirm Page link under banks table
+ */
+add_action('seed_confirm_after_banks', 'seed_confirm_link_button');
+function seed_confirm_link_button() {
+	$seed_confirm_link = seed_confirm_get_permalink();
+	if($seed_confirm_link) {
+		?>
+			<div class="sedd-confirm-payment-page-link">
+				<a href="<?php echo $seed_confirm_link; ?>" class="btn btn-primary"><?php _e('Confirm Payment', 'seed-confirm') ?></a>
+			</div>
+		<?php
+	}
 }
 
 /**
@@ -245,12 +290,14 @@ function seed_confirm_shortcode( $atts ) {
 
 	ob_start();
 	?>
+	<?php do_action('seed_confirm_before_confirm_content'); ?>
 	<?php if( $_SERVER['REQUEST_METHOD'] === 'POST' ): ?>
 	<div class="seed-confirm-message" style="background-color: <?php echo get_option( 'seed_confirm_notification_bg_color' ); ?>">
+		<?php do_action('seed_confirm_before_message'); ?>
 		<?php echo get_option( 'seed_confirm_notification_text' ); ?>
 	</div>
 	<?php endif; ?>
-
+	<?php do_action('seed_confirm_before_form'); ?>
 	<form method="post" id="seed-confirm-form" class="seed-confirm-form _heading" enctype="multipart/form-data">
 		<?php wp_nonce_field( 'seed-confirm-form-'.$post->ID ) ?>
         <?php $seed_confirm_required = json_decode( get_option( 'seed_confirm_required' ), true );  ?>
@@ -456,7 +503,7 @@ function seed_confirm_shortcode( $atts ) {
 		<input type="hidden" name="postid" value="<?php echo $post->ID ?>" />
 		<input type="submit" class="btn btn-primary" value="<?php esc_html_e( 'Submit Payment Detail', 'seed-confirm' ); ?>" />
 	</form>
-
+	<?php do_action('seed_confirm_after_form'); ?>
 <?php
 	return ob_get_clean();
 }
