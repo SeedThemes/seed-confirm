@@ -12,6 +12,7 @@
 .seed-confirm-banks .table>thead>tr>th {border-bottom: 1px solid #000;background-color: #f2f2f2;}
 .seed-confirm-banks .seed-confirm-bank-logo {min-width: 36px;text-align: center;}
 .seed-confirm-banks .seed-confirm-bank-logo img {border-radius: 5px}
+.sedd-confirm-payment-page-link { margin-bottom: 30px; text-align: right; }
 .wc-bacs-bank-details-heading,
 .wc-bacs-bank-details,
 body.woocommerce-order-received .seed_confirm_order_meta {display: none;}
